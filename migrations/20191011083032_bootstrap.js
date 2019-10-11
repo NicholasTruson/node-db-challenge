@@ -61,6 +61,29 @@ a unique Id.
     tbl.string("resource_description");
   })
 
+  .createTable("project_resources", tbl => {
+    tbl.increments();
+
+    tbl
+      .integer("project_id")
+      .unsigned()
+      .notNullable()
+      .references("id")
+      .inTable("projects")
+      .onDelete("RESTRICT")
+      .onUpdate("CASCADE");
+
+    tbl
+      .integer("resource_id")
+      .unsigned()
+      .notNullable()
+      .references("id")
+      .inTable("resources")
+      .onDelete("RESTRICT")
+      .onUpdate("CASCADE");
+  });
+};
+
 exports.down = function(knex) {
     return knex.schema
 
