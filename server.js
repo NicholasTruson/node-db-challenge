@@ -1,8 +1,19 @@
 const express = require("express");
 const helmet = require("helmet");
 
+// PULL IN ROUTERS
+
+const ProjectRouter = require("./projects/project-router.js");
+const ResourceRouter = require("./resources/resource-router.js");
+
 const server = express();
+
 server.use(helmet());
 server.use(express.json());
+
+// USE ROUTERS
+
+server.use("/api/projects", ProjectRouter);
+server.use("/api/resources", ResourceRouter);
 
 module.exports = server;
